@@ -19,19 +19,32 @@ namespace home
             this.player1 = player1;
             this.player2 = player2;
         }
-        public void Move(Player player, int x, int y, Field field)
+        public void Move(Player player, Field field)
         {
-            ref char cell = ref field.SetSign(0, 0);
+            (int x, int y) = player.Attack();
+            ref char cell = ref field.SetSign(x, y);
             cell = player.Side;
         }
 
         public void startGame()
         {
+            Console.WriteLine("This is start of the game: ");
             field.Print();
-            while (field.IsGameOver())
+            int count = 0;
+            while (count < 10)
             {
-                Move(player1, 2, 2, field);
-                field.Print();
+                if(count % 2 == 0)
+                {
+                    Move(player1, field);
+                    field.Print();
+                    count++;
+                }
+                else if(count % 2 != 0)
+                {
+                    Move(player2, field);
+                    field.Print();
+                    count++;
+                }
             }
         }
     }

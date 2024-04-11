@@ -12,7 +12,7 @@ namespace home
     {
         static void Main(string[] args)
         {
-            Game game = new Game(new Field(4), new Player("Oleg", 'x'), new Player("Marek", '0'));
+            Game game = new Game(new Field(4), new User("Oleg", 'x'), new Bot("Marek", '0'));
             game.startGame();
         }
     }
