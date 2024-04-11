@@ -31,8 +31,8 @@ namespace SpaceForField
         }
 
         public Field(int size) {
-            this.size = size;
-            this.battleField = new char[size, size];
+            this.sizeProp = size;
+            this.battleField = new char[this.size, this.size];
             Init();
         }
 
@@ -42,7 +42,7 @@ namespace SpaceForField
             {
                 for (int j = 0; j < size; j++)
                 {
-                    battleField[i, j] = '+';
+                    battleField[i, j] = ' ';
                 }
             }
         }
@@ -60,5 +60,51 @@ namespace SpaceForField
             }
         }
 
+        public ref char SetSign(int x, int y)
+        {
+            return ref battleField[x, y];
+        }
+
+
+        public bool IsGameOver()
+        {
+            for (int i = 0; i < battleField.GetLength(0); i++)
+            {
+                if (battleField[i, 0] != ' ' && battleField[i, 0] == battleField[i, 1] && battleField[i, 1] == battleField[i, 2])
+                {
+                    return true;
+                }
+            }
+
+            for (int j = 0; j < battleField.GetLength(1); j++)
+            {
+                if (battleField[0, j] != ' ' && battleField[0, j] == battleField[1, j] && battleField[1, j] == battleField[2, j])
+                {
+                    return true;
+                }
+            }
+
+            if (battleField[0, 0] != ' ' && battleField[0, 0] == battleField[1, 1] && battleField[1, 1] == battleField[2, 2])
+            {
+                return true; 
+            }
+
+            if (battleField[0, 2] != ' ' && battleField[0, 2] == battleField[1, 1] && battleField[1, 1] == battleField[2, 0])
+            {
+                return true; 
+            }
+
+            for (int i = 0; i < battleField.GetLength(0); i++)
+            {
+                for (int j = 0; j < battleField.GetLength(1); j++)
+                {
+                    if (battleField[i, j] == ' ')
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 }

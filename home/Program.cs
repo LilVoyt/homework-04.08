@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using home;
 using SpaceForField;
 
 namespace home
@@ -11,8 +12,9 @@ namespace home
     {
         static void Main(string[] args)
         {
-            Field main = new Field(5);
-            main.Print();
+            Game game = new Game(new Field(4), new Player("Oleg", 'x'), new Player("Marek", '0'));
+            game.startGame();
         }
     }
 }
+
